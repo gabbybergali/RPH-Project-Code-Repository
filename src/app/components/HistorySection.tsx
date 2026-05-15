@@ -28,8 +28,9 @@ export function HistorySection() {
             Echoes of Time
           </h2>
           <div className="h-1.5 w-24 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full mx-auto mb-6 shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
-          <p className="text-lg text-amber-100/80 max-w-3xl mx-auto font-light">
-            A journey through the centuries of Lake Bato's storied past, from ancestral roots to modern conservation.
+          <p className="text-xl text-amber-100/80 max-w-4xl mx-auto font-light leading-relaxed">
+            Lake Bato, the 7th largest lake in the Philippines, offers a glimpse into the region’s rich history and unique biodiversity. Originally known as <span className="text-amber-400 font-normal italic">Sadit na Ranow</span>, it has been a vital resource for local communities since pre-Spanish times, fostering the growth of Bato town.
+            <span className="block mt-4 text-[10px] uppercase tracking-[0.4em] text-amber-500/40 font-bold">(Wikipedia)</span>
           </p>
         </motion.div>
 

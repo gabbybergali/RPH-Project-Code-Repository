@@ -234,6 +234,12 @@ export function CustomCursor() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
+          className="relative"
+          style={{ 
+            opacity: 0.7,
+            backdropFilter: 'blur(1px)',
+            WebkitBackdropFilter: 'blur(1px)'
+          }}
         >
           <img
             src={fishImage}
@@ -241,8 +247,8 @@ export function CustomCursor() {
             className="w-12 h-12 select-none pointer-events-none"
             style={{
               filter: isHovering 
-                ? 'drop-shadow(0 0 12px rgba(103,232,249,0.9)) saturate(1.5)' 
-                : 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4))',
+                ? 'drop-shadow(0 0 12px rgba(103,232,249,0.9)) saturate(1.5) contrast(1.5)' 
+                : 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)) contrast(1.4) brightness(1.1)',
               transition: 'filter 0.3s ease'
             }}
           />

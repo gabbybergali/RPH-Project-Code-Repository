@@ -16,21 +16,29 @@ export function CultureSection() {
     const video = videoRef.current;
     const audio = audioRef.current;
 
-    const syncAudio = () => {
+    const updatePlayback = () => {
       if (inView && !video.paused) {
-        audio.play().catch(e => {
-          console.log('Autoplay sound blocked by browser policy. Interaction required.', e);
-        });
+        audio.muted = false;
+        audio.play().catch(() => {});
       } else {
+        audio.muted = true;
         audio.pause();
       }
     };
 
-    // Attempt sync when inView or video state changes
-    syncAudio();
+    updatePlayback();
 
-    const handlePlay = () => audio.play().catch(() => {});
-    const handlePause = () => audio.pause();
+    const handlePlay = () => {
+      if (inView) {
+        audio.muted = false;
+        audio.play().catch(() => {});
+      }
+    };
+    
+    const handlePause = () => {
+      audio.muted = true;
+      audio.pause();
+    };
 
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
@@ -83,7 +91,7 @@ export function CultureSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Faith & Celebration
+            Artery of Faith
           </h2>
           <div className="h-1 w-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mb-6" />
           <p className="text-lg text-purple-100/80 max-w-3xl mx-auto">
@@ -112,7 +120,7 @@ export function CultureSection() {
               <div className="absolute bottom-8 left-8 pointer-events-none">
                 <div className="flex items-center gap-3 mb-2">
                   <Sparkles className="w-5 h-5 text-purple-400" />
-                  <span className="text-[10px] font-bold text-purple-300 uppercase tracking-[0.4em]">Cinematic Ritual</span>
+                  <span className="text-[10px] font-bold text-purple-300 uppercase tracking-[0.4em]">"Daluyan ng Pananampalataya"</span>
                 </div>
                 <h3 className="text-3xl font-bold text-white italic tracking-tight">The Fluvial Procession</h3>
               </div>
@@ -124,19 +132,14 @@ export function CultureSection() {
               </div>
               
               <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <p className="text-xl md:text-2xl text-purple-100/90 font-light leading-relaxed italic">
-                    "Every year, the lake becomes a floating cathedral as boats adorned with flowers
-                    and candles carry the image of Our Lady of Peñafrancia across the sacred waters."
+                <div className="md:col-span-2">
+                  <p className="text-xl md:text-2xl text-purple-100/90 font-light leading-relaxed italic mb-8">
+                    "Every third Saturday of September, the fluvial procession of Ina, Our Lady of Peñafrancia, takes place on the waters of Lake Bato. Rooted in the deep Marian devotion of the Bicol region, this local tradition mirrors the grand Peñafrancia Festival, where millions honor Our Lady of Peñafrancia, affectionately called Ina (Mother)."
                   </p>
-                </div>
-                <div className="space-y-6 text-purple-100/70 text-lg leading-relaxed border-l border-purple-400/20 pl-8">
-                  <p>
-                    This tradition binds faith, family, and community—a moment when the entire lake
-                    shimmers with devotion, and the people's prayers rise like incense over the water.
-                  </p>
-                  <p>
-                    A testament to the enduring spiritual connection between the people of Bato and the waters that sustain them.
+                  <div className="h-px w-full bg-purple-400/20 mb-8" />
+                  <p className="text-lg text-purple-100/70 leading-relaxed font-light">
+                    While the main celebration unfolds along the Bicol River in Naga City, the people of Bato have embraced this devotion through their own fluvial procession on the lake that sustains their community. 
+                    <span className="block mt-4 text-sm font-bold uppercase tracking-widest text-purple-400/60">— Filipinas Heritage Library</span>
                   </p>
                 </div>
               </div>

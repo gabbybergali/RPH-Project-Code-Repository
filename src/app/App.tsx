@@ -6,6 +6,7 @@ import { HistorySection } from './components/HistorySection';
 import { LifeSection } from './components/LifeSection';
 import { CultureSection } from './components/CultureSection';
 import { PeopleSection } from './components/PeopleSection';
+import { LivelihoodSection } from './components/LivelihoodSection';
 import { PamanaSection } from './components/PamanaSection';
 import { Footer } from './components/Footer';
 
@@ -21,6 +22,7 @@ export default function App() {
         <LifeSection />
         <CultureSection />
         <PeopleSection />
+        <LivelihoodSection />
         <PamanaSection />
       </main>
       <Footer />

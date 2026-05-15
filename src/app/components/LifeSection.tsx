@@ -28,98 +28,121 @@ export function LifeSection() {
           </p>
         </motion.div>
 
+        {/* Main Observation Deck */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-gradient-to-br from-red-950/60 to-orange-950/40 backdrop-blur-md border-l-4 border-orange-500 rounded-2xl p-8 mb-16 shadow-2xl shadow-red-950/50"
+          transition={{ duration: 1 }}
+          className="relative bg-slate-900/40 backdrop-blur-3xl border border-white/10 rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
         >
-          <div className="flex items-start gap-6">
-            <div className="p-3 bg-orange-500/20 rounded-xl">
-              <AlertTriangle className="w-8 h-8 text-orange-500" />
+          {/* Header Status Bar */}
+          <div className="bg-red-500/10 border-b border-red-500/20 px-6 md:px-10 py-5 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
+              <span className="text-red-400 font-black tracking-[0.2em] text-[8px] md:text-[10px] uppercase">Alert: Ecological Crisis</span>
             </div>
-            <div>
-              <h3 className="text-2xl font-bold text-orange-100 mb-2 uppercase tracking-wide">Vulnerable Status</h3>
-              <p className="text-orange-200 text-lg font-light leading-relaxed">
-                Population decline of over <span className="font-bold text-white underline decoration-orange-500 decoration-2 underline-offset-4 text-2xl italic">99%</span> since the 1980s.
-              </p>
-              <p className="text-orange-200/60 mt-3 italic">
-                The sinarapan is now in a vulnerable state, facing existential threats from overfishing,
-                habitat degradation, and ecological imbalance.
-              </p>
+            <div className="flex items-center gap-4 md:gap-6">
+              <div className="text-center md:text-right">
+                <div className="text-white font-bold text-base md:text-lg leading-none uppercase tracking-tighter">Critically Endangered</div>
+                <div className="text-red-400/60 text-[8px] md:text-[9px] font-bold tracking-[0.2em] mt-1">OFFICIAL CLASSIFICATION - DENR</div>
+              </div>
+              <div className="h-8 w-px bg-red-500/20 hidden md:block" />
+              <div className="text-red-400 font-black text-xl md:text-2xl italic tracking-tighter">-99% <span className="text-[9px] uppercase tracking-widest not-italic opacity-60">Loss</span></div>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-12">
+            {/* Left Column: Specimen Viewer */}
+            <div className="lg:col-span-8 p-6 md:p-12 border-b lg:border-b-0 lg:border-r border-white/5 relative">
+              {/* Viewfinder Corners - Scaled for Mobile */}
+              <div className="absolute top-8 md:top-12 left-8 md:left-12 w-6 h-6 md:w-8 md:h-8 border-t-2 border-l-2 border-cyan-500/30" />
+              <div className="absolute top-8 md:top-12 right-8 md:right-12 w-6 h-6 md:w-8 md:h-8 border-t-2 border-r-2 border-cyan-500/30" />
+              <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12 w-6 h-6 md:w-8 md:h-8 border-b-2 border-l-2 border-cyan-500/30" />
+              <div className="absolute bottom-8 md:bottom-12 right-8 md:right-12 w-6 h-6 md:w-8 md:h-8 border-b-2 border-r-2 border-cyan-500/30" />
+              
+              <div className="relative aspect-[16/10] bg-black/40 rounded-3xl flex items-center justify-center p-8 overflow-hidden group">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(6,182,212,0.1)_0%,_transparent_70%)]" />
+                <motion.img 
+                  initial={{ scale: 1.1, opacity: 0 }}
+                  animate={inView ? { scale: 1, opacity: 1 } : {}}
+                  transition={{ duration: 1.5, delay: 0.5 }}
+                  src={sinarapanMainImg} 
+                  alt="Sinarapan Macro" 
+                  className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_50px_rgba(34,211,238,0.2)]"
+                />
+                
+                {/* Coordinates & Metadata */}
+                <div className="absolute top-6 left-6 text-[8px] font-mono text-cyan-500/40 tracking-[0.2em] space-y-1">
+                  <div>LAT: 13.3333° N</div>
+                  <div>LNG: 123.3667° E</div>
+                </div>
+                <div className="absolute bottom-6 right-6 text-[8px] font-mono text-cyan-500/40 tracking-[0.2em]">
+                  SCAN_01 // BIOME: LAKE_BATO
+                </div>
+              </div>
+
+              <div className="mt-10">
+                <h3 className="text-3xl font-bold text-white mb-4 tracking-tight italic">
+                  Mistichthys luzonensis
+                </h3>
+                <p className="text-cyan-100/40 text-lg font-light leading-relaxed max-w-2xl">
+                  The world's smallest commercially harvested fish. A biological miracle so fragile its entire existence hangs in a delicate balance within the Bicol ecosystem.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Data & Analytics */}
+            <div className="lg:col-span-4 bg-white/5 flex flex-col h-full">
+              {/* Stats Grid */}
+              <div className="p-8 md:p-12 flex-grow space-y-10">
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <Fish className="w-5 h-5 text-cyan-400" />
+                    <span className="text-cyan-400 font-black tracking-[0.3em] text-[10px] uppercase">Biological Data</span>
+                  </div>
+                  <ul className="space-y-6">
+                    {[
+                      { label: "Species", value: "Endemic to Bato" },
+                      { label: "Avg. Length", value: "12.5 Millimeters" },
+                      { label: "Physiology", value: "Translucent Skin" },
+                      { label: "Market Status", value: "Global Rarity" }
+                    ].map((stat, i) => (
+                      <li key={i} className="flex justify-between items-end border-b border-white/5 pb-3">
+                        <span className="text-white/40 text-xs font-bold uppercase tracking-widest">{stat.label}</span>
+                        <span className="text-cyan-100 font-medium text-sm">{stat.value}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <Film className="w-5 h-5 text-cyan-400" />
+                    <span className="text-cyan-400 font-black tracking-[0.3em] text-[10px] uppercase">Scale Reference</span>
+                  </div>
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 group">
+                    <img 
+                      src={sinarapanCoinImg} 
+                      alt="Scale" 
+                      className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-[10px] font-bold text-white uppercase tracking-widest">
+                      VS. Philippine One-Peso
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom CTA Area */}
+              <div className="p-8 border-t border-white/5 bg-cyan-500/5">
+                <p className="text-[10px] text-cyan-400/60 font-bold uppercase tracking-[0.2em] leading-relaxed">
+                  Observation complete. Critical action required to prevent total species loss.
+                </p>
+              </div>
             </div>
           </div>
         </motion.div>
-
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
-          {/* Left: Featured Macro Detail */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:col-span-7 relative group"
-          >
-            <div className="bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/5 overflow-hidden shadow-2xl relative min-h-[500px] flex flex-col">
-              <img 
-                src={sinarapanMainImg} 
-                alt="Sinarapan Close-up" 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-8 left-8 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 backdrop-blur-md flex items-center justify-center border border-cyan-400/30 shadow-lg">
-                  <Fish className="w-6 h-6 text-cyan-400" />
-                </div>
-                <div>
-                  <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-[0.3em] mb-1">Scientific Insight</div>
-                  <div className="text-2xl font-bold text-white tracking-tight">Macro Biological Detail</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right: Info & Comparison */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="lg:col-span-5 flex flex-col gap-8"
-          >
-            {/* About Card */}
-            <div className="bg-slate-800/30 backdrop-blur-md border border-white/5 rounded-3xl p-8 hover:border-cyan-400/30 transition-all duration-500">
-              <h3 className="text-xl font-semibold text-white uppercase tracking-widest mb-6 border-b border-white/5 pb-4">
-                The Sinarapan
-              </h3>
-              <ul className="space-y-4">
-                {[
-                  "Smallest commercially harvested fish globally",
-                  "Endemic to Lake Bato's unique ecosystem",
-                  "Average length: 12.5 millimeters",
-                  "Distinctive transparent physiology"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 group/item">
-                    <span className="w-2 h-2 rounded-full bg-cyan-500 mt-1.5 group-hover/item:scale-125 transition-transform shadow-[0_0_8px_rgba(6,182,212,0.6)]" />
-                    <span className="text-cyan-100/70 font-light leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Comparison Image */}
-            <div className="aspect-[4/3] bg-slate-900/60 rounded-3xl border border-white/5 overflow-hidden group shadow-xl relative">
-              <img 
-                src={sinarapanCoinImg} 
-                alt="Sinarapan Size Comparison" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6">
-                <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-1">Scale Reference</div>
-                <div className="text-white font-medium">Comparison vs. Philippine Coin</div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
 
 
       </div>
