@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Production
+dist/
+build/
+
+# Media (Exclude ALL for initial push)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.mp3
+*.wav
+*.ogg
+*.mov
+*.MOV
+*.mp4
+*.m4a
+
+# Source Files
+Source Files Vid_Img/
+
+# Misc
+.DS_Store
+.env*
