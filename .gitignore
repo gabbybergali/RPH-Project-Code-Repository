@@ -5,15 +5,17 @@ node_modules/
 dist/
 build/
 
-# Media (Exclude ALL for initial push)
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.svg
-*.mp3
-*.wav
-*.ogg
+# Media - ALLOW IMAGES
+!*.jpg
+!*.jpeg
+!*.png
+!*.gif
+!*.svg
+!*.mp3
+!*.wav
+!*.ogg
+
+# Media - EXCLUDE LARGE VIDEOS
 *.mov
 *.MOV
 *.mp4
