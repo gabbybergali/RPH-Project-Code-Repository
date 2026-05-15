@@ -20,7 +20,7 @@ export function LifeSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-            Sinarapan & Tabios
+            Sinarapan
           </h2>
           <div className="h-1.5 w-24 bg-gradient-to-r from-cyan-400 to-teal-400 rounded-full mx-auto mb-6 shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
           <p className="text-lg text-cyan-100/80 max-w-3xl mx-auto font-light">
@@ -32,19 +32,19 @@ export function LifeSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-gradient-to-br from-red-950/60 to-orange-950/40 backdrop-blur-md border-l-4 border-red-500 rounded-2xl p-8 mb-16 shadow-2xl shadow-red-950/50"
+          className="bg-gradient-to-br from-red-950/60 to-orange-950/40 backdrop-blur-md border-l-4 border-orange-500 rounded-2xl p-8 mb-16 shadow-2xl shadow-red-950/50"
         >
           <div className="flex items-start gap-6">
-            <div className="p-3 bg-red-500/20 rounded-xl">
-              <AlertTriangle className="w-8 h-8 text-red-500" />
+            <div className="p-3 bg-orange-500/20 rounded-xl">
+              <AlertTriangle className="w-8 h-8 text-orange-500" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-red-100 mb-2 uppercase tracking-wide">Critical Status</h3>
-              <p className="text-red-200 text-lg font-light leading-relaxed">
-                Population decline of over <span className="font-bold text-white underline decoration-red-500 decoration-2 underline-offset-4 text-2xl italic">99%</span> since the 1980s.
+              <h3 className="text-2xl font-bold text-orange-100 mb-2 uppercase tracking-wide">Vulnerable Status</h3>
+              <p className="text-orange-200 text-lg font-light leading-relaxed">
+                Population decline of over <span className="font-bold text-white underline decoration-orange-500 decoration-2 underline-offset-4 text-2xl italic">99%</span> since the 1980s.
               </p>
-              <p className="text-red-200/60 mt-3 italic">
-                The sinarapan is now critically endangered, facing existential threats from overfishing,
+              <p className="text-orange-200/60 mt-3 italic">
+                The sinarapan is now in a vulnerable state, facing existential threats from overfishing,
                 habitat degradation, and ecological imbalance.
               </p>
             </div>
