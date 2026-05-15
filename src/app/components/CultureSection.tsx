@@ -1,14 +1,53 @@
 import { motion } from 'motion/react';
 import { useInView } from './useInView';
-import { Music, Sparkles, Film, Image as ImageIcon } from 'lucide-react';
-import { HymnPlayer } from './HymnPlayer';
+import { Music, Sparkles, Film, Image as ImageIcon, Volume2, VolumeX } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import fluvialVideo from '../../assets/fluvial-procession.mp4';
+import hymnAudio from '../../assets/hymn-of-bato.mp3';
 
 export function CultureSection() {
   const { ref, inView } = useInView();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current || !audioRef.current) return;
+
+    const video = videoRef.current;
+    const audio = audioRef.current;
+
+    const syncAudio = () => {
+      if (inView && !video.paused) {
+        audio.play().catch(e => {
+          console.log('Autoplay sound blocked by browser policy. Interaction required.', e);
+        });
+      } else {
+        audio.pause();
+      }
+    };
+
+    // Attempt sync when inView or video state changes
+    syncAudio();
+
+    const handlePlay = () => audio.play().catch(() => {});
+    const handlePause = () => audio.pause();
+
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+
+    return () => {
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      audio.pause();
+    };
+  }, [inView]);
 
   return (
     <section id="culture" ref={ref} className="py-20 bg-gradient-to-b from-slate-900 via-purple-950/20 to-slate-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(168,85,247,0.1)_0%,_transparent_50%)] pointer-events-none" />
+
+      {/* Audio Element */}
+      <audio ref={audioRef} src={hymnAudio} loop />
 
       <motion.div
         animate={{
@@ -52,58 +91,55 @@ export function CultureSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl border border-purple-400/30 backdrop-blur-sm overflow-hidden mb-6">
-              <div className="h-full flex items-center justify-center">
-                <div className="text-center space-y-3">
-                  <Film className="w-16 h-16 text-purple-400 mx-auto" />
-                  <div className="text-purple-200 text-sm">
-                    [VIDEO PLACEHOLDER – FLUVIAL PROCESSION]
-                  </div>
+            <div className="aspect-video bg-black/40 rounded-[2rem] border border-purple-400/30 backdrop-blur-sm overflow-hidden mb-12 shadow-[0_32px_64px_-12px_rgba(168,85,247,0.3)] relative group">
+              <video 
+                ref={videoRef}
+                src={fluvialVideo}
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 pointer-events-none" />
+              <div className="absolute bottom-8 left-8 pointer-events-none">
+                <div className="flex items-center gap-3 mb-2">
+                  <Sparkles className="w-5 h-5 text-purple-400" />
+                  <span className="text-[10px] font-bold text-purple-300 uppercase tracking-[0.4em]">Cinematic Ritual</span>
+                </div>
+                <h3 className="text-3xl font-bold text-white italic tracking-tight">The Fluvial Procession</h3>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-10">
+                <Sparkles className="w-32 h-32 text-purple-400" />
+              </div>
+              
+              <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
+                  <p className="text-xl md:text-2xl text-purple-100/90 font-light leading-relaxed italic">
+                    "Every year, the lake becomes a floating cathedral as boats adorned with flowers
+                    and candles carry the image of Our Lady of Peñafrancia across the sacred waters."
+                  </p>
+                </div>
+                <div className="space-y-6 text-purple-100/70 text-lg leading-relaxed border-l border-purple-400/20 pl-8">
+                  <p>
+                    This tradition binds faith, family, and community—a moment when the entire lake
+                    shimmers with devotion, and the people's prayers rise like incense over the water.
+                  </p>
+                  <p>
+                    A testament to the enduring spiritual connection between the people of Bato and the waters that sustain them.
+                  </p>
                 </div>
               </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-purple-400/30 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="w-6 h-6 text-purple-400" />
-                <h3 className="text-xl font-semibold text-white">Fluvial Procession</h3>
-              </div>
-              <p className="text-purple-100/80 leading-relaxed mb-4">
-                Every year, the lake becomes a floating cathedral as boats adorned with flowers
-                and candles carry the image of Our Lady of Peñafrancia across the sacred waters.
-              </p>
-              <p className="text-purple-100/80 leading-relaxed">
-                This tradition binds faith, family, and community—a moment when the entire lake
-                shimmers with devotion, and the people's prayers rise like incense over the water.
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-6"
-          >
-            <div className="aspect-video bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-xl border border-purple-400/30 backdrop-blur-sm overflow-hidden">
-              <div className="h-full flex items-center justify-center">
-                <div className="text-center space-y-3">
-                  <ImageIcon className="w-16 h-16 text-purple-400 mx-auto" />
-                  <div className="text-purple-200 text-sm">
-                    [IMAGE PLACEHOLDER – PEÑAFRANCIA DEVOTION]
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <HymnPlayer />
             </div>
           </motion.div>
         </div>
